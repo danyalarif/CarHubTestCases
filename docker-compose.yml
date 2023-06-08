@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  tester:
+    build:
+      context: ./testingcode
+      dockerfile: Dockerfile
+    image: test-cases
+    container_name: mytestcases
+    command: node index.js
+    volumes:
+      - ./testingcode/:/usr/src/tester
+      - /usr/src/tester/node_modules
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    node_modules:
+    web-root:
+      driver: local
